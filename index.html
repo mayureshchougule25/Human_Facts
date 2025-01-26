@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Psychology Facts</title>
+    <title>Interactive Psychology Facts</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         .container {
@@ -21,6 +22,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         button {
@@ -43,13 +45,77 @@
             font-size: 18px;
             color: #333;
         }
+
+        .character {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 200px;
+            background-color: #f0c674;
+            border-radius: 50px;
+            animation: idle 2s infinite;
+        }
+
+        .character .eyes {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            width: 60px;
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .character .eye {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .character .eye::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            transition: transform 0.3s;
+        }
+
+        @keyframes idle {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes click {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+
+        @keyframes read {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Random Psychology Facts</h1>
+        <h1>Interactive Psychology Facts</h1>
         <button id="randomFactButton">Show Random Fact</button>
         <div id="factDisplay" class="fact-display"></div>
+        <div class="character">
+            <div class="eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+            </div>
+        </div>
     </div>
     <script>
         const facts = [
@@ -115,10 +181,27 @@
             }
         ];
 
+        const character = document.querySelector('.character');
+        const eyes = document.querySelectorAll('.eye::after');
+
         document.getElementById('randomFactButton').addEventListener('click', () => {
             const randomIndex = Math.floor(Math.random() * facts.length);
             const randomFact = facts[randomIndex];
             document.getElementById('factDisplay').innerHTML = `<strong>${randomFact.fact}:</strong> ${randomFact.description}`;
+
+            // Animate character to click the button
+            character.style.animation = 'click 0.5s';
+            setTimeout(() => {
+                character.style.animation = 'idle 2s infinite';
+            }, 500);
+
+            // Animate eyes to read the fact
+            eyes.forEach(eye => {
+                eye.style.transform = 'translateX(5px)';
+                setTimeout(() => {
+                    eye.style.transform = 'translateX(0)';
+                }, 3000);
+            });
         });
     </script>
 </body>
