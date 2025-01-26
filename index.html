@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Psychology Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .fact-display {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Psychology Facts</h1>
+        <button id="randomFactButton">Show Random Fact</button>
+        <div id="factDisplay" class="fact-display"></div>
+    </div>
+    <script>
+        const facts = [
+            {
+                "fact": "Stroop Effect",
+                "description": "It's harder to name the color of a word when the word itself is a different color."
+            },
+            {
+                "fact": "Mere Exposure Effect",
+                "description": "We like things more when we're familiar with them."
+            },
+            {
+                "fact": "Cognitive Dissonance",
+                "description": "Holding conflicting beliefs causes discomfort, prompting change."
+            },
+            {
+                "fact": "Halo Effect",
+                "description": "One positive trait can make us assume other positive traits."
+            },
+            {
+                "fact": "Confirmation Bias",
+                "description": "We favor information that confirms our existing beliefs."
+            },
+            {
+                "fact": "Bystander Effect",
+                "description": "More people around means less chance of someone helping in an emergency."
+            },
+            {
+                "fact": "Pygmalion Effect",
+                "description": "Higher expectations can lead to better performance."
+            },
+            {
+                "fact": "Spotlight Effect",
+                "description": "We think people notice us more than they actually do."
+            },
+            {
+                "fact": "Placebo Effect",
+                "description": "Believing a treatment works can lead to real improvements."
+            },
+            {
+                "fact": "Barnum Effect",
+                "description": "People believe vague, general statements are personally meaningful."
+            },
+            {
+                "fact": "Dunning-Kruger Effect",
+                "description": "People with low ability overestimate their competence."
+            },
+            {
+                "fact": "Social Proof",
+                "description": "We tend to follow the actions of others to determine correct behavior."
+            },
+            {
+                "fact": "Anchoring Bias",
+                "description": "Initial information acts as a reference point for decision-making."
+            },
+            {
+                "fact": "Loss Aversion",
+                "description": "We prefer avoiding losses over acquiring equivalent gains."
+            },
+            {
+                "fact": "Negativity Bias",
+                "description": "Negative experiences have a greater impact than positive ones."
+            }
+        ];
+
+        document.getElementById('randomFactButton').addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const randomFact = facts[randomIndex];
+            document.getElementById('factDisplay').innerHTML = `<strong>${randomFact.fact}:</strong> ${randomFact.description}`;
+        });
+    </script>
+</body>
+</html>
